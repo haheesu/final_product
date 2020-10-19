@@ -20,7 +20,7 @@ public interface OrganizationMapper {
 	@Select("select * from test_mysql")
 	List<Organization> getOrganizationList();
 	
-	@Insert("insert into test_mysql values(#{id}, #{name})")
+	@Insert("insert into test_mysql(id, name) values(#{id}, #{name})")
 	int insertOrganization(@Param("id") Long id, @Param("name") String name);
 	
 	@Update("update test_mysql set name=#{name} where id=#{id}")

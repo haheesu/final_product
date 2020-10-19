@@ -19,12 +19,12 @@
 	</nav>
       
    <div style="padding: 10px; text-align: center;">
-          <h1><a th:href="@{/list}" style="text-decoration: none;">등록 하기</a></h1>
+          <h1><a th:href="@{/board/list}" style="text-decoration: none;">등록 하기</a></h1>
    </div>
 
    <div>
 
-    <form role="form" th:object=${org} th:action=" @{/insertProc}"
+    <form role="form" th:object=${org} th:action=" @{/board/insertProc}"
         method="post" enctype="multipart/form-data">
         <div>
             <label for="id" style="font-weight: bolder;">ID</label>
@@ -37,7 +37,7 @@
             placeholder="사명을 입력하세요" required="required">
         </div>
         <div style="text-align: right;">
-            <input type="submit" th:value="목록" th:formaction="@{/list}">
+            <input type="submit" th:value="목록" th:formaction="@{/board/list}">
             <input type="submit" th:value="등록">
             <input type="reset" th:value="취소">
         </div>

@@ -19,7 +19,7 @@
 	</nav>
       
    <div style="padding: 10px; text-align: center;">
-          <h1><a th:href="@{/list}" style="text-decoration: none;">전체 목록</a></h1>
+          <h1><a th:href="@{/board/list}" style="text-decoration: none;">전체 목록</a></h1>
    </div>
 
    <div>
@@ -32,7 +32,7 @@
     </thead>
     <tbody>
         <tr th:each="data : ${org}" th:onclick=
-            "'window.location.href = \'' + @{/detail/{identity}(identity=${data.id})} + '\''">
+            "'window.location.href = \'' + @{/board/detail/{identity}(identity=${data.id})} + '\''">
             <td th:text="${data.id}" style="cursor: pointer; text-align: center;"></td>
             <td th:text="${data.name}" style="cursor: pointer; text-align: center;"></td>
         </tr>

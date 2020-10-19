@@ -16,6 +16,7 @@ import com.ziumks.organization.mapper.OrganizationMapper;
 import com.ziumks.organization.model.Organization;
 
 @Controller
+@RequestMapping("/board")
 public class HomeController {
 	
 	private OrganizationMapper mapper;

@@ -46,7 +46,7 @@ public class HomeController {
 	
 	
 	@RequestMapping("/insert")
-	public String putOrganizationForm(@ModelAttribute Organization org) {
+	public String putOrganizationForm(@ModelAttribute("org") Organization organization, Model model) {
 		return "board/insert";
 	}
 	@RequestMapping("/insertProc")

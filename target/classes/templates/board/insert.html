@@ -28,12 +28,12 @@
         method="post" enctype="multipart/form-data">
         <div>
             <label for="id" style="font-weight: bolder;">ID</label>
-            <input type="text" th:field="*{id}" id="id" name="id"
+            <input type="text" th:value="${org.id}" id="id" name="id"
             placeholder="ID를 입력하세요" required="required">
         </div>
         <div>
             <label for="name" style="font-weight: bolder;">NAME</label>
-            <input type="text" th:field="*{name}" id="name" name="name"
+            <input type="text" th:value="${org.name}" id="name" name="name"
             placeholder="사명을 입력하세요" required="required">
         </div>
         <div style="text-align: right;">

@@ -25,7 +25,7 @@ public class OrganizationController {
 	}
 	
 	@GetMapping("/org/{id}")
-	public Organization getOrganization(@PathVariable("id") Long id) {
+	public Organization getOrganization(@PathVariable("id") int id) {
 		return mapper.getOrganization(id);
 	}
 	
@@ -35,17 +35,17 @@ public class OrganizationController {
 	}
 	
 	@PutMapping("/org/{id}")
-	public void putOrganization(@PathVariable("id") Long id, @RequestParam("name") String name) {
+	public void putOrganization(@PathVariable("id") int id, @RequestParam("name") String name) {
 		mapper.insertOrganization(id, name);
 	}
 	
 	@PostMapping("/org/{id}")
-	public void postOrganization(@PathVariable("id") Long id, @RequestParam("name") String name) {
+	public void postOrganization(@PathVariable("id") int id, @RequestParam("name") String name) {
 		mapper.updateOrganization(id, name);
 	}
 	
 	@DeleteMapping("/org/{id}")
-	public void deleteOrganization(@PathVariable("id") Long id) {
+	public void deleteOrganization(@PathVariable("id") int id) {
 		mapper.deleteOrganization(id);
 	}
 } 

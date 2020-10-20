@@ -4,26 +4,26 @@ import java.io.Serializable;
 
 public class Organization implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	private static final int serialVersionUID = 1;
 
-	private Long id;
+	private int id;
 	private String name;
 	
 	public Organization() {
 		
 	}
 	
-	public Organization(Long id, String name) {
+	public Organization(int id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
 	}
 	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

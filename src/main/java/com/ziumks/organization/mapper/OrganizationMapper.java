@@ -30,8 +30,12 @@ public interface OrganizationMapper {
 	@Delete("delete from test_mysql where id=#{id}")
 	int deleteOrganization(@Param("id") int id);
 	
-	@Insert("select max(id) from test_mysql "
-			+ "insert into file(id, filename, fileoriginname, fileurl) "
+	@Insert(
+//			"select max(id) from test_mysql " +
+			 "insert into file(id, filename, fileOriginName, fileUrl) "
 			+ "values(#{id}, #{filename}, #{fileoriginname}, #{fileurl})")
 	int fileInsert(FileVO file);
+	
+	@Select("select * from file where id=#{id}")
+	FileVO fileDetail(@Param("id") int id);
 }

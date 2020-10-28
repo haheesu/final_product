@@ -46,6 +46,13 @@
             <input type="submit" th:value="삭제"
                 th:formaction="@{/board/delete/{identity}(identity=${detail.id})}">
         </div>
+        <div>
+        	<label style="font-weight: bolder;">첨부파일</label>
+        	<p>
+        		<a th:if="${file}" th:href="@{/board/fileDown/{identity}(identity=${file.id})}">
+        		[[${file.fileoriginname}]]</a>
+        	</p>
+        </div>
     </form>
    </div>
 

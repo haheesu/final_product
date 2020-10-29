@@ -10,3 +10,10 @@
 - ERROR : [Ljava.lang.StackTraceElement;@6ec71e18
 - filenotfoundexception 발생
 - myhome\files에 파일이 저장되지 않는 현상
+
+
+===================================
+### sixth
+- bootstrap 원페이지 사이트와 합침(zium_organization)
+- 이미지 출력 안됨
+- 캐러셀 출력 

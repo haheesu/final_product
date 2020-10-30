@@ -50,10 +50,11 @@
       position: absolute; 
       top: 0; 
       left: 0; 
-      width: 100%; 
-      height: 100%;
+      width: 80%; 
+      height: 80%;
+      align: center
     }
-
+	
     #myBtn:hover {
       background-color: #555;
     }
@@ -81,7 +82,7 @@
   <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-  <img src="..\images\zium_bg_b.png" alt="Zium" class="mx-2" style="width:150px;">
+  <img th:src="@{board/zium_bg_b.png}" src="zium_bg_b.png" alt="zium" class="mx-2" style="width:150px;"/>
   
   <button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExampleDefault"
@@ -164,7 +165,7 @@
   
   <br><br>
   
-  <form class="form-inline justify-content-center" action="/action_page.php">
+  <form class="form-inline justify-content-center" action="">
     <div class="form-group">
       <label for="id" class="ml-2">ID : </label>
       <input type="text" class="form-control mr-2 ml-2 mb-2" placeholder="Enter ID" id="id">
@@ -183,7 +184,7 @@
 
   <br><br>
 
-  <div class="container" style="text-align: center;">
+  <div class="container justify-content-center" style="text-align: center;">
     <button type="button" class="btn btn-dark btn-lg mb-2" data-toggle="popover" 
     title="popover" data-trigger="hover" data-content="열자(列子) 〈탕문편(湯問篇)>">지음이란?</button>
     <p>백아(佰牙)와 종자기(鍾子期)처럼 서로의 내면까지 공감하는 깊은 우정을 지음(知音)이라 일컫습니다.<br>
@@ -192,13 +193,13 @@
       
       지음지식서비스는 오래된 벗처럼 문제해결의 과정을 고객과 함께 하고자 합니다.</p><br>
     <div class="embed-container">
-      <iframe src='https://www.youtube.com/embed/PgrHlqQ7Gnk' frameborder='0' allowfullscreen></iframe>    
+     <iframe src='https://www.youtube.com/embed/PgrHlqQ7Gnk' frameborder='0'></iframe> 
     </div>
   </div>
 
   <br><br>
 
-  <form action="/action_page.php" class="border border-secondary rounded" style="width: 60%;">
+  <form th:action="@{/board/insert}" class="border border-secondary rounded" style="width: 60%;">
     
     <br><br>
     <div style="text-align:  center;">

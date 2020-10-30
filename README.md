@@ -17,3 +17,8 @@
 - bootstrap 원페이지 사이트와 합침(zium_organization)
 - 이미지 출력 안됨
 - 캐러셀 출력 
+
+### seventh
+- fifth, sixth 문제점 미결
+- list'추가' 404error 해결
+- embed container 크기 80%로 줄이자 가운데 정렬 안됨

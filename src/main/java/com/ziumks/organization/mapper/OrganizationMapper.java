@@ -39,9 +39,8 @@ public interface OrganizationMapper {
 	@Select("select * from file where id=#{id}")
 	FileVO fileDetail(@Param("id") int id);
 	
-	@Update("update file set"  
+	@Update("update file set "  
 			+ "filename=#{filename}, fileOriginName=#{fileoriginname}, fileUrl=#{fileurl} " 
 			+ "where id=#{id}")
-	int fileUpdate(@Param("id") int id, @Param("filename") String filename, 
-			@Param("fileoriginname") String fileoriginname , @Param("fileurl") String fileurl);
+	int fileUpdate(FileVO file);
 }

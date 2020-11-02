@@ -79,7 +79,7 @@ public class HomeController {
 			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); // 확장자
 			File destinationFile; // DB에 저장할 파일명
 			String destinationFileName;
-			String fileUrl = "C:\\Users\\USER\\Desktop\\workspace\\myhome\\files";
+			String fileUrl = "C:\\Users\\USER\\Desktop\\practice\\bootstrap_zium_organization\\files\\";
 			
 			do { // 우선 실행 후 // 고유명 생성
 				destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
@@ -193,14 +193,14 @@ public class HomeController {
 		int id = org.getId();
 		String identity = Integer.toString(id);
 		
-		if (files.isEmpty()) {
-			mapper.updateOrganization(org.getId(), org.getName());
-		} else {
+//		if (files.isEmpty()) {
+//			mapper.updateOrganization(org.getId(), org.getName());
+//		} else {
 			String fileName = files.getOriginalFilename(); // 사용자 컴퓨터에 저장된 파일명 그대로
 			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); // 확장자
 			File destinationFile; // DB에 저장할 파일명
 			String destinationFileName;
-			String fileUrl = "C:\\Users\\USER\\Desktop\\workspace\\myhome\\files";
+			String fileUrl = "C:\\Users\\USER\\Desktop\\practice\\bootstrap_zium_organization\\files\\";
 			
 			do { // 우선 실행 후 // 고유명 생성
 				destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
@@ -218,8 +218,9 @@ public class HomeController {
 			file.setFileoriginname(fileName);
 			file.setFileurl(fileUrl);
 			
-			mapper.fileUpdate(file.getId(), file.getFilename(), file.getFileoriginname(), file.getFileurl());
-		}
+			mapper.fileUpdate(file);
+			System.out.println(destinationFile);
+//		}
 		
 		return "redirect:/board/detail/" + identity;
 		

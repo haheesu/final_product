@@ -1,151 +1,158 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title th:text="${title}">오래된 벗, 지음</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title th:text="${title}">오래된 벗, 지음</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <style>
-    /* Make the image fully responsive */
-   
-    body{
-      position: relative;
-    }
+<style>
+/* Make the image fully responsive */
+body {
+	position: relative;
+}
 
-    form{
-      margin : 0px auto;
-    }
-
-    </style>
+form {
+	margin: 0px auto;
+}
+</style>
 </head>
 
-  <body>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-        <img src="zium_bg_b.png" alt="Zium" class="mx-2" style="width:150px;">
-        
-        <button class="navbar-toggler" type="button" data-toggle="collapse"
-                  data-target="#navbarsExampleDefault"
-                  aria-controls="navbarsExampleDefault" aria-expanded="false"
-                  aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item"> 
-              <a class="nav-link" href="#" th:href="@{/board/list}">知音</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">공공사업본부</a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#sec2">공공1사업본부</a>
-                <a class="dropdown-item" href="#sec2">공공2사업본부</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#sec3">금융사업본부</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#sec4">경영기획팀</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#sec5">VCs</a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-      <br>
+<body>
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+		<img src="zium_bg_b.png" alt="Zium" class="mx-2" style="width: 150px;">
 
-   <div id="sec1" class="container-fluid">
-  
-    <br><br>
-  
-        <form class="border border-secondary rounded" style="width: 60%;" role="form" th:object=${org}
-        th:action="@{/board/list}" method="post">
-        
-        <br><br>
-        <div style="text-align:  center;">
-            <h3 >상세 내용</h3>
-            <p>기업정보를 등록해주세요.</p>
-        </div>
-    
-        <br><br>
-            
-            <div>
-                <label style="font-weight: bolder">ID</label>
-                <p th:text="${detail.id}"></p>
-                <input type="hidden" th:field="${detail.id}">
-            </div>
-            <div>
-                <label style="font-weight: bolder">NAME</label>
-                <p th:text="${detail.name}"></p>
-                <input type="hidden" th:field="${detail.name}">
-            </div>
-            <div style="text-align: right;">
-                <input type="submit" th:value="목록"
-                    th:formaction="@{/board/list}">
-                <input type="submit" th:value="수정"
-                    th:formaction="@{/board/update/{identity}(identity=${detail.id})}">
-                <input type="submit" th:value="삭제"
-                    th:formaction="@{/board/delete/{identity}(identity=${detail.id})}">
-            </div>
-            <div>
-                <label style="font-weight: bolder;">첨부파일</label>
-                <p>
-                    <a th:if="${file}" th:href="@{/board/fileDown/{identity}(identity=${file.id})}">
-                    [[${file.fileoriginname}]]</a>
-                </p>
-            </div>
-        
-                
-        </form>
-  
-    <br><br>
-    </div>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarsExampleDefault"
+			aria-controls="navbarsExampleDefault" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
 
-    <div style="text-align: right;">
-        <button type="button" class="btn btn-dark mb-2 mr-2" data-toggle="modal" data-target="#myModal">
-          Contact Us
-        </button>
-      </div>
-      <!-- The Modal -->
-      <div class="modal fade" id="myModal">
-        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable text-center" >
-          <div class="modal-content">
-      
-            <!-- Modal Header -->
-            <div class="modal-header">
-              <h4 class="modal-title">Contact us</h4>
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-      
-            <!-- Modal body -->
-            <div class="modal-body" style="text-align: center;">
-              <h6>무슨 일로 방문하셨나요?</h6>
-              <textarea id="contactUs" cols="60" rows="10"></textarea>
-            </div>
-      
-            <!-- Modal footer -->
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-dark" data-dismiss="modal">Submit</button>
-            </div>
-      
-          </div>
-        </div>
-      </div>
-      
-      <div class="jumbotron bg-dark text-left text-white" style="margin-bottom:0">
-          <h3>ZiumKnowledge Service</h3>
-          <hr color="white">
-          <p>2020 Copyright reserved.<br>
-          <strong>본사</strong> : 경기도 성남시 수정구 창업로 42 판교제2테크노밸리 경기기업성장센터 532호<br>
-          <strong>대전사무소</strong> : 대전광역시 유성구 테크노 9로 35 IT전용벤처타운 204호  <br>
-          <strong>TEL</strong> : 031 - 722 - 2091 <br>
-          <a href="http://www.ziumks.com/">http://www.ziumks.com</a></p>
-      </div>
-  </body>
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#"
+					th:href="@{/board/list}">知音</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbardrop"
+					data-toggle="dropdown">공공사업본부</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#sec2">공공1사업본부</a> <a
+							class="dropdown-item" href="#sec2">공공2사업본부</a>
+					</div></li>
+				<li class="nav-item"><a class="nav-link" href="#sec3">금융사업본부</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#sec4">경영기획팀</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#sec5">VCs</a></li>
+			</ul>
+		</div>
+	</nav>
+
+	<div id="sec1" class="container-fluid">
+
+		<br>
+		<br>
+
+		<form class="border border-secondary rounded mt-5" style="width: 60%;"
+			role="form" th:object=${org} th:action="@{/board/list}" method="post">
+
+			<br>
+			<br>
+			<div style="text-align: center;">
+				<h3>상세 내용</h3>
+				<p>기업정보를 등록해주세요.</p>
+			</div>
+
+			<br>
+			<br>
+			<div>
+				<figure class="wp-block-table">
+					<table class="table table-striped"
+						style="width: 80%; margin: 3px auto">
+						<thead style="text-align: center;">
+							<tr>
+								<th style="text-align: center;">ID</th>
+								<th style="text-align: center;">NAME</th>
+								<th style="text-align: center;">첨부파일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="data : ${detail}">
+								<td th:text="${detail.id}"
+									style="cursor: pointer; text-align: center;"></td>
+								<td th:text="${detail.name}"
+									style="cursor: pointer; text-align: center;"></td>
+								<td style="cursor: pointer; text-align: center;"><a
+									th:if="${file}"
+									th:href="@{/board/fileDown/{identity}(identity=${file.id})}">
+										[[${file.fileoriginname}]]</a></td>
+							</tr>
+						</tbody>
+					</table>
+				</figure>
+			</div>
+			<div class="mx-2 my-2" style="text-align: right;">
+				<input class="btn btn-dark" type="submit" th:value="목록" th:formaction="@{/board/list}">
+				<input class="btn btn-dark" type="submit" th:value="수정"
+					th:formaction="@{/board/update/{identity}(identity=${detail.id})}">
+				<input class="btn btn-dark" type="submit" th:value="삭제"
+					th:formaction="@{/board/delete/{identity}(identity=${detail.id})}">
+			</div>
+		</form>
+
+		<br>
+		<br>
+	</div>
+
+	<div style="text-align: right;">
+		<button type="button" class="btn btn-dark mb-2 mr-2"
+			data-toggle="modal" data-target="#myModal">Contact Us</button>
+	</div>
+	<!-- The Modal -->
+	<div class="modal fade" id="myModal">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable text-center">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Contact us</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body" style="text-align: center;">
+					<h6>무슨 일로 방문하셨나요?</h6>
+					<textarea id="contactUs" cols="60" rows="10"></textarea>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-dark" data-dismiss="modal">Submit</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="jumbotron bg-dark text-left text-white"
+		style="margin-bottom: 0">
+		<h3>ZiumKnowledge Service</h3>
+		<hr color="white">
+		<p>
+			2020 Copyright reserved.<br> <strong>본사</strong> : 경기도 성남시 수정구
+			창업로 42 판교제2테크노밸리 경기기업성장센터 532호<br> <strong>대전사무소</strong> :
+			대전광역시 유성구 테크노 9로 35 IT전용벤처타운 204호 <br> <strong>TEL</strong> :
+			031 - 722 - 2091 <br> <a href="http://www.ziumks.com/">http://www.ziumks.com</a>
+		</p>
+	</div>
+</body>
 </html>

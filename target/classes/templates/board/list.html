@@ -1,370 +1,618 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title th:text="${title}">오래된 벗, 지음</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<title th:text="${title}">오래된 벗, 지음</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  <style>
-    /* Make the image fully responsive */
-    .carousel-inner img {
-      width: 80%;
-      height: 80%;
-    }
-    img.displayed{
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-    }
+<style>
+/* Make the image fully responsive */
+.carousel-inner img {
+	width: 80%;
+	height: 80%;
+}
 
-    .carousel-control-next-icon {
-       background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%343A40' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E") !important;
-    }
-    .carousel-control-prev-icon {
-       background-image : url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%343A40' viewBox='0 0 8 8'%3E%3Cpath d='M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E") !important;
-    }
+img.displayed {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-    body{
-      position: relative;
-    }
+.carousel-control-next-icon {
+	background-image:
+		url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%343A40' viewBox='0 0 8 8'%3E%3Cpath d='M1.5 0l-1.5 1.5 2.5 2.5-2.5 2.5 1.5 1.5 4-4-4-4z'/%3E%3C/svg%3E")
+		!important;
+}
 
-    form{
-      margin : 0px auto;
-    }
+.carousel-control-prev-icon {
+	background-image:
+		url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%343A40' viewBox='0 0 8 8'%3E%3Cpath d='M4 0l-4 4 4 4 1.5-1.5-2.5-2.5 2.5-2.5-1.5-1.5z'/%3E%3C/svg%3E")
+		!important;
+}
 
-    .embed-container { 
-      position: relative; 
-      padding-bottom: 56.25%; 
-      height: 0; 
-      overflow: hidden; 
-      max-width: 100%; 
-    } 
-    
-    .embed-container iframe, 
-    .embed-container object, 
-    .embed-container embed {
-      position: absolute; 
-      top: 0; 
-      left: 0; 
-      width: 80%; 
-      height: 80%;
-      align: center
-    }
-	
-    #myBtn:hover {
-      background-color: #555;
-    }
+body {
+	position: relative;
+}
 
-    #myBtn {
-      display: none;
-      position: fixed;
-      bottom: 150px;
-      right: 30px;
-      z-index: 99;
-      font-size: 18px;
-      border: none;
-      outline: none;
-      background-color: #212529;
-      color: white;
-      cursor: pointer;
-      padding: 15px;
-      border-radius: 4px;
-    }
-    </style>
+form {
+	margin: 0px auto;
+}
+
+.embed-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	height: 0;
+	overflow: hidden;
+	max-width: 100%;
+}
+
+.embed-container iframe, .embed-container object, .embed-container embed
+	{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#myBtn:hover {
+	background-color: #555;
+}
+
+#myBtn {
+	display: none;
+	position: fixed;
+	bottom: 150px;
+	right: 30px;
+	z-index: 99;
+	font-size: 18px;
+	border: none;
+	outline: none;
+	background-color: #212529;
+	color: white;
+	cursor: pointer;
+	padding: 15px;
+	border-radius: 4px;
+}
+</style>
 </head>
 
 <body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-  <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+	<button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
-  <img th:src="@{board/zium_bg_b.png}" src="zium_bg_b.png" alt="zium" class="mx-2" style="width:150px;"/>
-  
-  <button class="navbar-toggler" type="button" data-toggle="collapse"
+	<nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+		<img th:src="@{board/zium_bg_b.png}" alt="zium"
+			class="mx-2" style="width: 150px;" />
+
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarsExampleDefault"
 			aria-controls="navbarsExampleDefault" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
-  </button>
-  
-  <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item"> 
-        <a class="nav-link" href="#" th:href="@{/board/list}">知音</a>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">공공사업본부</a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="#sec2">공공1사업본부</a>
-          <a class="dropdown-item" href="#sec2">공공2사업본부</a>
-        </div>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#sec3">금융사업본부</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#sec4">경영기획팀</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#sec5">VCs</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<br>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#"
+					th:href="@{/board/list}">知音</a></li>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbardrop"
+					data-toggle="dropdown">공공사업본부</a>
+					<div class="dropdown-menu">
+						<a class="dropdown-item" href="#sec2">공공1사업본부</a> <a
+							class="dropdown-item" href="#sec2">공공2사업본부</a>
+					</div></li>
+				<li class="nav-item"><a class="nav-link" href="#sec3">금융사업본부</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#sec4">경영기획팀</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="#sec5">VCs</a></li>
+			</ul>
+		</div>
+	</nav>
+	<br>
 
 
-<div id="sec1" class="container-fluid">
-  <div id="demo" class="carousel slide" data-ride="carousel">
-  
-    <!-- Indicators -->
-    <ul class="carousel-indicators">
-      <li data-target="#demo" data-slide-to="0" class="active"></li>
-      <li data-target="#demo" data-slide-to="1"></li>
-      <li data-target="#demo" data-slide-to="2"></li>
-    </ul>
-    
-    <!-- The slideshow -->
-    <div class="carousel-inner">
-      <div class="carousel-item active">
-        <img class="img-reponsive displayed" src="baron004.jpg" alt="baron1">
-        <div class="carousel-caption">
-          <h3>Headquarter</h3>
-          <p>경기 성남시 수정구 판교제2테크노밸리 경기기업성장센터</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img class="img-reponsive displayed" src="howl011.jpg" alt="howl1" width="1100" height="500">
-        <div class="carousel-caption">
-          <h3>Laboratory</h3> 
-          <p>대전 유성구 테크노파크 IT전용벤처타운</p>
-        </div>
-      </div>
-      <div class="carousel-item">
-        <img  class="img-reponsive displayed"src=" howl010.jpg" alt="howl2" width="1100" height="500">
-        <div class="carousel-caption">
-          <h3>지음지식서비스</h3>
-          <p>오래된 벗처럼<br>
-          지음지식서비스는 문제해결의 과정을 당신과 함께합니다.</p>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Left and right controls -->
-    <a class="carousel-control-prev" href="#demo" data-slide="prev">
-      <span class="carousel-control-prev-icon "></span>
-    </a>
-    <a class="carousel-control-next" href="#demo" data-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </a>
-  </div>
-  
-  <br><br>
-  
-  <form class="form-inline justify-content-center" action="">
-    <div class="form-group">
-      <label for="id" class="ml-2">ID : </label>
-      <input type="text" class="form-control mr-2 ml-2 mb-2" placeholder="Enter ID" id="id">
-    </div>
-    <div class="form-group">
-      <label for="pwd" class="ml-2">PW : </label>
-      <input type="password" class="form-control mr-2 ml-2 mb-2" placeholder="Enter PASSWORD" id="name">
-    </div>
-    <div class="form-check mr-2 ml-2 mb-2">
-      <label class="from-check-label">
-        <input type="checkbox" class="form-check-input">Remember me
-      </label>
-    </div>
-    <button type="submit" class="btn btn-dark mb-2">Submit</button>
-  </form>
+	<div id="sec1" class="container-fluid">
+		<div id="demo" class="carousel slide" data-ride="carousel">
 
-  <br><br>
+			<!-- Indicators -->
+			<ul class="carousel-indicators">
+				<li data-target="#demo" data-slide-to="0" class="active"></li>
+				<li data-target="#demo" data-slide-to="1"></li>
+				<li data-target="#demo" data-slide-to="2"></li>
+			</ul>
 
-  <div class="container justify-content-center" style="text-align: center;">
-    <button type="button" class="btn btn-dark btn-lg mb-2" data-toggle="popover" 
-    title="popover" data-trigger="hover" data-content="열자(列子) 〈탕문편(湯問篇)>">지음이란?</button>
-    <p>백아(佰牙)와 종자기(鍾子期)처럼 서로의 내면까지 공감하는 깊은 우정을 지음(知音)이라 일컫습니다.<br>
+			<!-- The slideshow -->
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img class="img-reponsive displayed" src="baron004.jpg"
+						alt="baron1">
+					<div class="carousel-caption">
+						<h3>Headquarter</h3>
+						<p>경기 성남시 수정구 판교제2테크노밸리 경기기업성장센터</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img class="img-reponsive displayed" src="howl011.jpg" alt="howl1"
+						width="1100" height="500">
+					<div class="carousel-caption">
+						<h3>Laboratory</h3>
+						<p>대전 유성구 테크노파크 IT전용벤처타운</p>
+					</div>
+				</div>
+				<div class="carousel-item">
+					<img class="img-reponsive displayed" src=" howl010.jpg" alt="howl2"
+						width="1100" height="500">
+					<div class="carousel-caption">
+						<h3>지음지식서비스</h3>
+						<p>
+							오래된 벗처럼<br> 지음지식서비스는 문제해결의 과정을 당신과 함께합니다.
+						</p>
+					</div>
+				</div>
+			</div>
 
-      전문성에 담겨있는 이해와 배려까지<br>
-      
-      지음지식서비스는 오래된 벗처럼 문제해결의 과정을 고객과 함께 하고자 합니다.</p><br>
-    <div class="embed-container">
-     <iframe src='https://www.youtube.com/embed/PgrHlqQ7Gnk' frameborder='0'></iframe> 
-    </div>
-  </div>
+			<!-- Left and right controls -->
+			<a class="carousel-control-prev" href="#demo" data-slide="prev">
+				<span class="carousel-control-prev-icon "></span>
+			</a> <a class="carousel-control-next" href="#demo" data-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</a>
+		</div>
 
-  <br><br>
+		<br>
+		<br>
 
-  <form th:action="@{/board/insert}" class="border border-secondary rounded" style="width: 60%;">
-    
-    <br><br>
-    <div style="text-align:  center;">
-      <h3 >전체 목록</h3>
-      <p>기업정보를 등록해주세요.</p>
-    </div>
+		<form class="form-inline justify-content-center" action="">
+			<div class="form-group">
+				<label for="id" class="ml-2">ID : </label> <input type="text"
+					class="form-control mr-2 ml-2 mb-2" placeholder="Enter ID" id="id">
+			</div>
+			<div class="form-group">
+				<label for="pwd" class="ml-2">PW : </label> <input type="password"
+					class="form-control mr-2 ml-2 mb-2" placeholder="Enter PASSWORD"
+					id="name">
+			</div>
+			<div class="form-check mr-2 ml-2 mb-2">
+				<label class="from-check-label"> <input type="checkbox"
+					class="form-check-input">Remember me
+				</label>
+			</div>
+			<button type="submit" class="btn btn-dark mb-2">Submit</button>
+		</form>
 
-    <br><br>
-    
+		<br>
+		<br>
 
-    <div>
-      <table>
-      <thead style="text-align: center;">
-          <tr>
-              <th style="text-align: center;">ID</th>
-              <th style="text-align: center;">NAME</th>
-          </tr>
-      </thead>
-      <tbody>
-          <tr th:each="data : ${org}" th:onclick=
-              "'window.location.href = \'' + @{/board/detail/{identity}(identity=${data.id})} + '\''">
-              <td th:text="${data.id}" style="cursor: pointer; text-align: center;"></td>
-              <td th:text="${data.name}" style="cursor: pointer; text-align: center;"></td>
-          </tr>
-      </tbody>
-      </table>
-     </div>
-  
-     <div style="text-align: right;">
-          <button onclick="location.href='/board/insert'">추가</button>
-      </div>
-  
-          
-  </form>
+		<div class="container justify-content-center"
+			style="text-align: center;">
+			<button type="button" class="btn btn-dark btn-lg mb-2"
+				data-toggle="popover" title="popover" data-trigger="hover"
+				data-content="열자(列子) 〈탕문편(湯問篇)>">지음이란?</button>
+			<p>
+				백아(佰牙)와 종자기(鍾子期)처럼 서로의 내면까지 공감하는 깊은 우정을 지음(知音)이라 일컫습니다.<br>
 
-  <br><br>
-</div>
+				전문성에 담겨있는 이해와 배려까지<br> 지음지식서비스는 오래된 벗처럼 문제해결의 과정을 고객과 함께 하고자
+				합니다.
+			</p>
+			<br>
+			<div class="embed-container">
+				<iframe src='https://www.youtube.com/embed/PgrHlqQ7Gnk'
+					frameborder='0'></iframe>
+			</div>
+		</div>
+
+		<br>
+		<br>
+
+		<form th:action="@{/board/insert}"
+			class="border border-secondary rounded" style="width: 60%;">
+
+			<br>
+			<br>
+			<div style="text-align: center;">
+				<h3>전체 목록</h3>
+				<p>기업정보를 등록해주세요.</p>
+			</div>
+
+			<br>
+			<br>
 
 
-<div id="sec2" class="media container-fluid border border-secondary rounded p-3" style="padding-top:70px;padding-bottom:70px;width: 80%;">
-  <div class="media-body">
-    <h4>공공사업본부 <small><i>Posted on October 27, 2020</i></small></h4>
-    <br>
-    <p><strong>지능형 스마트 국방 체계 수립및 국가기반산업(전력, 교통 등) 아키텍처 구축을 위한 차별화된 서비스</strong></p>
+			<div>
+				<figure class="wp-block-table">
+					<table class="table table-striped"
+						style="width: 80%; margin: 3px auto">
+						<thead style="text-align: center;">
+							<tr>
+								<th style="text-align: center;">ID</th>
+								<th style="text-align: center;">NAME</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="data : ${org}"
+								th:onclick="'window.location.href = \'' + @{/board/detail/{identity}(identity=${data.id})} + '\''">
+								<td th:text="${data.id}"
+									style="cursor: pointer; text-align: center;"></td>
+								<td th:text="${data.name}"
+									style="cursor: pointer; text-align: center;"></td>
+							</tr>
+						</tbody>
+					</table>
+				</figure>
+			</div>
 
-    <p>▷ 육,해,공군과 스마트 부대까지 아우르는 지능형 스마트 국방 전략 및 표준화 체계 제공</p>
-      
-    <p>▷ 전력, 교통 및 안전부문 관련 아키텍처 수립 및 운영성과 측정 서비스 제공</p>
-    <div>
-      <br>
-      <figure class="wp-block-table is-style-regular"><table class="table table-striped"><thead><tr><th><strong>프로젝트 / 사업명</strong></th><th><strong>고객사</strong></th><th><strong>년도</strong></th></tr></thead><tbody><tr><td>국방표준종합정보시스템 고도화를 위한 정보화전략계획(ISP)수립 사업</td><td>방위사업청</td><td>2020</td></tr><tr><td>지능형 스마트비행단 구출 정보화전략계획(ISP) 수립</td><td>공군본부</td><td>2020</td></tr><tr><td>20년 EA기반 정보화 종합관리(PMO) 용역</td><td>한국중부발전</td><td>2020</td></tr><tr><td>정보시스템 운영성과 측정 및 정보기술아키텍처(EA) 컨설팅</td><td>한국철도시설공단</td><td>2020</td></tr><tr><td>19년 EA기반 정보화 종합관리(PMO)용역</td><td>한국중부발전</td><td>2019</td></tr><tr><td>XX체계 정보화전략계획(ISP) 수립</td><td>공군본부</td><td>2019</td></tr><tr><td>사이버 수집체계 구축방안 연구</td><td>국방과학연구소</td><td>2019</td></tr><tr><td>2019년도 EA컨설팅 구축</td><td>한국동서발전</td><td>2019</td></tr><tr><td>스마트 부대 표준&nbsp;플랫폼 구축 ISP</td><td>육군본부</td><td>2019</td></tr><tr><td>정보기술아키텍처(EA) 기반 정보화종합관리(PMO) 용역</td><td>한국중부발전</td><td>2018</td></tr><tr><td>정보시스템 운영성과&nbsp;측정</td><td>한국철도시설공단</td><td>2018</td></tr><tr><td>2018년 관광지식정보시스템 정보화전략계획 수립 및 기능개선 용역</td><td>한국문화관광연구원</td><td>2018</td></tr><tr><td>데이터기반 도시재난 문제해결 대상발굴과 실행방안수립 및 시범구축</td><td>한국과학기술정보연구원</td><td>2018</td></tr><tr><td>EA컨설팅 구축</td><td>한국동서발전</td><td>2018</td></tr><tr><td>&#8230;</td><td>&#8230;</td><td>&#8230;</td></tr></tbody></table></figure>
-    </div>
-  </div>
-  <img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3" style="width:120px;">
-</div>
+			<div class="mb-5" style="text-align: center;">
+				<button type="button" class="btn btn-dark btn-lg"
+					onclick="location.href='/board/insert'">추가</button>
+			</div>
 
-<br><br>
 
-<div id="sec3" class="container-fluid border border-secondary rounded media p-3" style="padding-top:70px;padding-bottom:70px;width: 80%;">
-  <div class="media-body">
-    <h4>금융사업본부 <small><i>Posted on October 27, 2020</i></small></h4>
-    <br>
-    <p><strong>증권, 보험, 은행 등 금융 포스트 차세대 구축을 위한 차별화된 서비스</strong></p>
+		</form>
 
-    <p>▷ 금융 포스트 차세대 구축을 위한 전략 수립 및 PMO 컨설팅 수행</p>
-      
-    <p>▷ 금융 포스트 차세대 구축을 위한 통합고객 전략 수립 및 설계/구축 서비스 제공</p>
-    <br>
-      <figure class="wp-block-table"></figure>
-        <table class="table table-striped">
-          <thead><tr><th><strong>프로젝트 / 사업명</strong></th><th><strong>고객사</strong></th><th><strong>년도</strong></th></tr></thead>
-          <tbody><tr><td>카카오페이증권 고도화 구축 PMO</td><td>카카오페이증권</td><td>2020</td></tr><tr><td>신한생명-오렌지라이프 통합 IT 구축 &#8211; 통합고객시스템 총괄</td><td>신한생명-오렌지라이프</td><td>2020</td></tr><tr><td>The K 프로젝트(마케팅 허브) 컨설팅 &#8211; 통합고객전략수립</td><td>KB국민은행</td><td>2019</td></tr><tr><td>IT 표준화 분석/설계 컨설팅</td><td>미래에셋대우증권</td><td>2019</td></tr><tr><td>라인뱅크 CMS 구축 컨설팅 프로젝트</td><td>라인뱅크</td><td>2019</td></tr><tr><td>미래에셋대우 통합차세대시스템 PMO 컨설팅</td><td>미래에셋대우증권</td><td>2018</td></tr><tr><td>교보생명 차세대시스템 구축 &#8211; 통합고객시스템 부문 총괄&nbsp;</td><td>교보생명</td><td>2018</td></tr><tr><td>&#8230;</td><td>&#8230;</td><td>&#8230;</td></tr></tbody>
-        </table>
-      </figure>
-    
-  </div>
-  <img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3 " style="width:120px;">
-</div>
+		<br>
+		<br>
+	</div>
 
-<br><br>
 
-<div id="sec4" class="container-fluid border border-secondary rounded media p-3" style="padding-top:70px;padding-bottom:70px;width: 80%;">
-    <div class="media-body">
-      <h4>경영기획팀 <small><i>Posted on October 27, 2020</i></small></h4>
-      <br>
-      <div>
-        <p><strong>4차 산업혁명의 기반 서비스 중 빅데이터 및 오픈 플랫폼 분야에 차별화된 서비스</strong></p>
+	<div id="sec2"
+		class="media container-fluid border border-secondary rounded p-3"
+		style="padding-top: 70px; padding-bottom: 70px; width: 80%;">
+		<div class="media-body">
+			<h4>
+				공공사업본부 <small><i>Posted on October 27, 2020</i></small>
+			</h4>
+			<br>
+			<p>
+				<strong>지능형 스마트 국방 체계 수립및 국가기반산업(전력, 교통 등) 아키텍처 구축을 위한 차별화된
+					서비스</strong>
+			</p>
 
-        <p> ▷ IoT, 정형 및 비정형 등 대용량 데이터를 수집하고, 적재하고, 분석할 수 있는 빅데이터 플랫폼 및 서비스 제공</p>
+			<p>▷ 육,해,공군과 스마트 부대까지 아우르는 지능형 스마트 국방 전략 및 표준화 체계 제공</p>
 
-        <p> ▷ 금융 및 마이데이터 서비스를 위한 오픈 API 플랫폼 및 서비스 제공</p>
-        <br>
-        <figure class="wp-block-table"><table class="table table-striped"><thead><tr><th><strong>프로젝트 / 사업명</strong></th><th><strong>고객사</strong></th><th><strong>년도</strong></th></tr></thead><tbody><tr><td>금융 마이데이터 서비스 플랫폼 구축 기술 개발</td><td>정보통신기획평가원</td><td>2020</td></tr><tr><td>인공지능 기반의 미래교통운영 기반기술 개발 및 활용</td><td>한국교통연구원</td><td>2019</td></tr><tr><td>LPWAN기반의 IoT 플랫폼 기술 개발</td><td>중소기업기술정보진흥원</td><td>2019</td></tr><tr><td>재난안전정보 공유 플랫폼 실용화 방안 연구</td><td>한국과학기술정보연구원</td><td>2019</td></tr><tr><td>인공지능 확산을 위한 대상산업분석 및 실증수요 발굴</td><td>정보통신산업진흥원</td><td>2019</td></tr><tr><td>오픈 API 플랫폼 구축</td><td>오렌지라이프</td><td>2019</td></tr><tr><td>재난안전분야 빅데이터 기반 분석 및 활용 서비스 개발</td><td>한국과학기술정보연구원</td><td>2018</td></tr><tr><td>&#8230;</td><td>&#8230;</td><td>&#8230;</td></tr></tbody></table></figure>
-     </div>
-    </div>
+			<p>▷ 전력, 교통 및 안전부문 관련 아키텍처 수립 및 운영성과 측정 서비스 제공</p>
+			<div>
+				<br>
+				<figure class="wp-block-table is-style-regular">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th><strong>프로젝트 / 사업명</strong></th>
+								<th><strong>고객사</strong></th>
+								<th><strong>년도</strong></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>국방표준종합정보시스템 고도화를 위한 정보화전략계획(ISP)수립 사업</td>
+								<td>방위사업청</td>
+								<td>2020</td>
+							</tr>
+							<tr>
+								<td>지능형 스마트비행단 구출 정보화전략계획(ISP) 수립</td>
+								<td>공군본부</td>
+								<td>2020</td>
+							</tr>
+							<tr>
+								<td>20년 EA기반 정보화 종합관리(PMO) 용역</td>
+								<td>한국중부발전</td>
+								<td>2020</td>
+							</tr>
+							<tr>
+								<td>정보시스템 운영성과 측정 및 정보기술아키텍처(EA) 컨설팅</td>
+								<td>한국철도시설공단</td>
+								<td>2020</td>
+							</tr>
+							<tr>
+								<td>19년 EA기반 정보화 종합관리(PMO)용역</td>
+								<td>한국중부발전</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>XX체계 정보화전략계획(ISP) 수립</td>
+								<td>공군본부</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>사이버 수집체계 구축방안 연구</td>
+								<td>국방과학연구소</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>2019년도 EA컨설팅 구축</td>
+								<td>한국동서발전</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>스마트 부대 표준&nbsp;플랫폼 구축 ISP</td>
+								<td>육군본부</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>정보기술아키텍처(EA) 기반 정보화종합관리(PMO) 용역</td>
+								<td>한국중부발전</td>
+								<td>2018</td>
+							</tr>
+							<tr>
+								<td>정보시스템 운영성과&nbsp;측정</td>
+								<td>한국철도시설공단</td>
+								<td>2018</td>
+							</tr>
+							<tr>
+								<td>2018년 관광지식정보시스템 정보화전략계획 수립 및 기능개선 용역</td>
+								<td>한국문화관광연구원</td>
+								<td>2018</td>
+							</tr>
+							<tr>
+								<td>데이터기반 도시재난 문제해결 대상발굴과 실행방안수립 및 시범구축</td>
+								<td>한국과학기술정보연구원</td>
+								<td>2018</td>
+							</tr>
+							<tr>
+								<td>EA컨설팅 구축</td>
+								<td>한국동서발전</td>
+								<td>2018</td>
+							</tr>
+							<tr>
+								<td>&#8230;</td>
+								<td>&#8230;</td>
+								<td>&#8230;</td>
+							</tr>
+						</tbody>
+					</table>
+				</figure>
+			</div>
+		</div>
+		<img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3"
+			style="width: 120px;">
+	</div>
 
-  <img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3 " style="width:120px;">
-</div>
+	<br>
+	<br>
 
-<br><br>
+	<div id="sec3"
+		class="container-fluid border border-secondary rounded media p-3"
+		style="padding-top: 70px; padding-bottom: 70px; width: 80%;">
+		<div class="media-body">
+			<h4>
+				금융사업본부 <small><i>Posted on October 27, 2020</i></small>
+			</h4>
+			<br>
+			<p>
+				<strong>증권, 보험, 은행 등 금융 포스트 차세대 구축을 위한 차별화된 서비스</strong>
+			</p>
 
-<div id="sec5" class="container-fluid border border-secondary rounded media p-3" style="padding-top:70px;padding-bottom:70px;width: 80%;">
-  <div class="media-body">
-    <h4>VCs <small><i>Posted on October 27, 2020</i></small></h4>
-    <br>
-    <p><strong>지음지식서비스(Zium Knowledge Service)는</strong></p>
-    <p>언제나 고객의 문제를 들을 준비가 되어 있습니다.</p>
-    <p>그리고 그러한 문제를 해결할 준비가 되어 있습니다.</p>
-    <p>고객에게 단순히 지식을 전달하는데 만족하지 않겠습니다.</p>
-    <p>고객이 진정으로 원하는 소리에 귀를 기울여 만족할 수 있는 가치를 제공하겠습니다.</p>
-    <p>고객과 언제나 함께하여 상생(Win-Win)할 수 있는 진정한 파트너가 되겠습니다.</p>
-  </div>
-  <img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3" style="width:120px;">
-</div>
+			<p>▷ 금융 포스트 차세대 구축을 위한 전략 수립 및 PMO 컨설팅 수행</p>
 
-<br><br>
+			<p>▷ 금융 포스트 차세대 구축을 위한 통합고객 전략 수립 및 설계/구축 서비스 제공</p>
+			<br>
+			<figure class="wp-block-table">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th><strong>프로젝트 / 사업명</strong></th>
+							<th><strong>고객사</strong></th>
+							<th><strong>년도</strong></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>카카오페이증권 고도화 구축 PMO</td>
+							<td>카카오페이증권</td>
+							<td>2020</td>
+						</tr>
+						<tr>
+							<td>신한생명-오렌지라이프 통합 IT 구축 &#8211; 통합고객시스템 총괄</td>
+							<td>신한생명-오렌지라이프</td>
+							<td>2020</td>
+						</tr>
+						<tr>
+							<td>The K 프로젝트(마케팅 허브) 컨설팅 &#8211; 통합고객전략수립</td>
+							<td>KB국민은행</td>
+							<td>2019</td>
+						</tr>
+						<tr>
+							<td>IT 표준화 분석/설계 컨설팅</td>
+							<td>미래에셋대우증권</td>
+							<td>2019</td>
+						</tr>
+						<tr>
+							<td>라인뱅크 CMS 구축 컨설팅 프로젝트</td>
+							<td>라인뱅크</td>
+							<td>2019</td>
+						</tr>
+						<tr>
+							<td>미래에셋대우 통합차세대시스템 PMO 컨설팅</td>
+							<td>미래에셋대우증권</td>
+							<td>2018</td>
+						</tr>
+						<tr>
+							<td>교보생명 차세대시스템 구축 &#8211; 통합고객시스템 부문 총괄&nbsp;</td>
+							<td>교보생명</td>
+							<td>2018</td>
+						</tr>
+						<tr>
+							<td>&#8230;</td>
+							<td>&#8230;</td>
+							<td>&#8230;</td>
+						</tr>
+					</tbody>
+				</table>
+			</figure>
 
-<div style="text-align: right;">
-  <button type="button" class="btn btn-dark mb-2 mr-2" data-toggle="modal" data-target="#myModal">
-    Contact Us
-  </button>
-</div>
-<!-- The Modal -->
-<div class="modal fade" id="myModal">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable text-center" >
-    <div class="modal-content">
+		</div>
+		<img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3 "
+			style="width: 120px;">
+	</div>
 
-      <!-- Modal Header -->
-      <div class="modal-header">
-        <h4 class="modal-title">Contact us</h4>
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-      </div>
+	<br>
+	<br>
 
-      <!-- Modal body -->
-      <div class="modal-body" style="text-align: center;">
-        <h6>무슨 일로 방문하셨나요?</h6>
-        <textarea id="contactUs" cols="60" rows="10"></textarea>
-      </div>
+	<div id="sec4"
+		class="container-fluid border border-secondary rounded media p-3"
+		style="padding-top: 70px; padding-bottom: 70px; width: 80%;">
+		<div class="media-body">
+			<h4>
+				경영기획팀 <small><i>Posted on October 27, 2020</i></small>
+			</h4>
+			<br>
+			<div>
+				<p>
+					<strong>4차 산업혁명의 기반 서비스 중 빅데이터 및 오픈 플랫폼 분야에 차별화된 서비스</strong>
+				</p>
 
-      <!-- Modal footer -->
-      <div class="modal-footer">
-        <button type="submit" class="btn btn-dark" data-dismiss="modal">Submit</button>
-      </div>
+				<p>▷ IoT, 정형 및 비정형 등 대용량 데이터를 수집하고, 적재하고, 분석할 수 있는 빅데이터 플랫폼 및
+					서비스 제공</p>
 
-    </div>
-  </div>
-</div>
+				<p>▷ 금융 및 마이데이터 서비스를 위한 오픈 API 플랫폼 및 서비스 제공</p>
+				<br>
+				<figure class="wp-block-table">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th><strong>프로젝트 / 사업명</strong></th>
+								<th><strong>고객사</strong></th>
+								<th><strong>년도</strong></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>금융 마이데이터 서비스 플랫폼 구축 기술 개발</td>
+								<td>정보통신기획평가원</td>
+								<td>2020</td>
+							</tr>
+							<tr>
+								<td>인공지능 기반의 미래교통운영 기반기술 개발 및 활용</td>
+								<td>한국교통연구원</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>LPWAN기반의 IoT 플랫폼 기술 개발</td>
+								<td>중소기업기술정보진흥원</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>재난안전정보 공유 플랫폼 실용화 방안 연구</td>
+								<td>한국과학기술정보연구원</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>인공지능 확산을 위한 대상산업분석 및 실증수요 발굴</td>
+								<td>정보통신산업진흥원</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>오픈 API 플랫폼 구축</td>
+								<td>오렌지라이프</td>
+								<td>2019</td>
+							</tr>
+							<tr>
+								<td>재난안전분야 빅데이터 기반 분석 및 활용 서비스 개발</td>
+								<td>한국과학기술정보연구원</td>
+								<td>2018</td>
+							</tr>
+							<tr>
+								<td>&#8230;</td>
+								<td>&#8230;</td>
+								<td>&#8230;</td>
+							</tr>
+						</tbody>
+					</table>
+				</figure>
+			</div>
+		</div>
 
-<div class="jumbotron bg-dark text-left text-white" style="margin-bottom:0">
-    <h3>ZiumKnowledge Service</h3>
-    <hr color="white">
-    <p>2020 Copyright reserved.<br>
-    <strong>본사</strong> : 경기도 성남시 수정구 창업로 42 판교제2테크노밸리 경기기업성장센터 532호<br>
-    <strong>대전사무소</strong> : 대전광역시 유성구 테크노 9로 35 IT전용벤처타운 204호  <br>
-    <strong>TEL</strong> : 031 - 722 - 2091 <br>
-    <a href="http://www.ziumks.com/">http://www.ziumks.com</a></p>
-</div>
+		<img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3 "
+			style="width: 120px;">
+	</div>
 
-<script>
+	<br>
+	<br>
+
+	<div id="sec5"
+		class="container-fluid border border-secondary rounded media p-3"
+		style="padding-top: 70px; padding-bottom: 70px; width: 80%;">
+		<div class="media-body">
+			<h4>
+				VCs <small><i>Posted on October 27, 2020</i></small>
+			</h4>
+			<br>
+			<p>
+				<strong>지음지식서비스(Zium Knowledge Service)는</strong>
+			</p>
+			<p>언제나 고객의 문제를 들을 준비가 되어 있습니다.</p>
+			<p>그리고 그러한 문제를 해결할 준비가 되어 있습니다.</p>
+			<p>고객에게 단순히 지식을 전달하는데 만족하지 않겠습니다.</p>
+			<p>고객이 진정으로 원하는 소리에 귀를 기울여 만족할 수 있는 가치를 제공하겠습니다.</p>
+			<p>고객과 언제나 함께하여 상생(Win-Win)할 수 있는 진정한 파트너가 되겠습니다.</p>
+		</div>
+		<img src="zium_bg_w.png" alt="Zium" class="mr-3 mt-3"
+			style="width: 120px;">
+	</div>
+
+	<br>
+	<br>
+
+	<div style="text-align: right;">
+		<button type="button" class="btn btn-dark mb-2 mr-2"
+			data-toggle="modal" data-target="#myModal">Contact Us</button>
+	</div>
+	<!-- The Modal -->
+	<div class="modal fade" id="myModal">
+		<div
+			class="modal-dialog modal-dialog-centered modal-dialog-scrollable text-center">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Contact us</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body" style="text-align: center;">
+					<h6>무슨 일로 방문하셨나요?</h6>
+					<textarea id="contactUs" cols="60" rows="10"></textarea>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-dark" data-dismiss="modal">Submit</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="jumbotron bg-dark text-left text-white"
+		style="margin-bottom: 0">
+		<h3>ZiumKnowledge Service</h3>
+		<hr color="white">
+		<p>
+			2020 Copyright reserved.<br> <strong>본사</strong> : 경기도 성남시 수정구
+			창업로 42 판교제2테크노밸리 경기기업성장센터 532호<br> <strong>대전사무소</strong> :
+			대전광역시 유성구 테크노 9로 35 IT전용벤처타운 204호 <br> <strong>TEL</strong> :
+			031 - 722 - 2091 <br> <a href="http://www.ziumks.com/">http://www.ziumks.com</a>
+		</p>
+	</div>
+
+	<script>
   $( function () {
     $( '[data-toggle="popover"]' ).popover()
   } );
 </script>
 
-<script>
+	<script>
   //Get the button
   var mybutton = document.getElementById("myBtn");
   

@@ -183,14 +183,46 @@ public class HomeController {
 	@RequestMapping("/update/{id}")
 	public String postOrganization(@PathVariable("id") int id, Model model) {
 		model.addAttribute("detail", mapper.getOrganization(id));
+		model.addAttribute("file", mapper.fileDetail(id));
 		return "board/update";
 	}
 	@RequestMapping("/updateProc")
-	public String postOrganizationProc(@ModelAttribute Organization org) {
-		mapper.updateOrganization(org.getId(), org.getName());
+	public String postOrganizationProc(@ModelAttribute Organization org, @RequestPart MultipartFile files, 
+			HttpServletRequest request) throws IllegalStateException, IOException, Exception{
+		
 		int id = org.getId();
 		String identity = Integer.toString(id);
+		
+		if (files.isEmpty()) {
+			mapper.updateOrganization(org.getId(), org.getName());
+		} else {
+			String fileName = files.getOriginalFilename(); // 사용자 컴퓨터에 저장된 파일명 그대로
+			String fileNameExtension = FilenameUtils.getExtension(fileName).toLowerCase(); // 확장자
+			File destinationFile; // DB에 저장할 파일명
+			String destinationFileName;
+			String fileUrl = "C:\\Users\\USER\\Desktop\\workspace\\myhome\\files";
+			
+			do { // 우선 실행 후 // 고유명 생성
+				destinationFileName = RandomStringUtils.randomAlphanumeric(32) + "." + fileNameExtension;
+				destinationFile = new File(fileUrl + destinationFileName); // 합쳐주기
+			} while (destinationFile.exists());
+			
+			destinationFile.getParentFile().mkdirs(); // 디렉토리
+			files.transferTo(destinationFile);
+			
+			mapper.updateOrganization(org.getId(), org.getName());;
+			
+			FileVO file = new FileVO();
+			file.setId(org.getId());
+			file.setFilename(destinationFileName);
+			file.setFileoriginname(fileName);
+			file.setFileurl(fileUrl);
+			
+			mapper.fileUpdate(file.getId(), file.getFilename(), file.getFileoriginname(), file.getFileurl());
+		}
+		
 		return "redirect:/board/detail/" + identity;
+		
 	}
 	
 	

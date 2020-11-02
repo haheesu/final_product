@@ -34,13 +34,13 @@
  /SQL: update file setfilename=?, fileOriginName=?, fileUrl=? where id=?
 
  
-##8th
+## 8th
  
- ###해결
+ ### 해결
  - fileupdate 에러 해결 : 'setfilename' -> 'set filename'
  - detail 화면에서 파일 다운로드 불가 해결 : fileUrl 맨뒤에 "....bootstrap_zium_organization\\files" -> "....bootstrap_zium_organization\\files\\"
  
- ###오류
+ ### 오류
  - 원래 파일 업로드 안됐던 개체에 수정 시 파일을 업로드 하면 가볍게 무시당함
  - : detail.html의 문제? HomeController의 문제??
  
